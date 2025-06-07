@@ -1,131 +1,272 @@
-.card{
-    max-width: 500px;
-    height: max-content;
-    margin: 25px auto;
-    border: 1px solid rgb(173, 173, 173);
-    border-radius: 5px;
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-.card-header{
-    display: flex;
+.card {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-sizing: border-box;
 }
 
-.card-header > h5{
-    margin: 0;
-    padding: 11px;
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 14px;
+  border-bottom: 1px solid #efefef;
 }
 
-.card-pic img{
-    width: 30px;
-    border-radius: 30px;
-    height: auto;
-    object-fit: contain;
-    padding: 5px;
+.card-header .card-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.card-image img{
-    width: 100%;
+.card-header .card-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.card-content{
-    text-align: left;
-    line-height: 4px;
-    padding: 3px 10px;
-    border-bottom: 1px solid rgb(173, 173, 173)
+.card-header h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
 }
 
-.add-comment{
-    display: flex;
-    align-items: center;
+.card-header h5 a {
+  text-decoration: none;
+  color: #262626;
 }
 
-.add-comment input{
-    margin: 0;
-    outline: none;
-    border: none;
-    padding: 10px
+.card-image {
+  width: 100%;
+  max-height: 600px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #efefef;
 }
 
-.comment{
-    border: none;
-    background-color: none
-    ;font-weight: bolder;
-    cursor: pointer;
-    color: #339ce3;
+.card-image img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
+.card-content {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* justify-content: space-between; */
+  gap: 1px;
+  text-align: left;
+}
 
-.material-symbols-outlined-red {
-    color: red;
-  font-variation-settings:
+.card-content .material-symbols-outlined {
+  cursor: pointer;
+  font-size: 28px;
+  color: #262626;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.card-content .material-symbols-outlined-red {
+  color: #ed4956;
+    font-variation-settings:
   'FILL' 1,
   'wght' 700,
   'GRAD' 0,
   'opsz' 48
 }
-.material-symbols-outlined{
-    cursor: pointer;
+
+.card-content p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #262626;
 }
 
-.showComment{
-    width: 100vw;
-    min-height:100vh ;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(16, 13, 13, 0.4);
-    
+.card-content .card-body-text {
+  color: #555;
+  margin-top: 10px;
 }
 
-.container{
-    display: flex;
-    width: 80%;
-    background-color: white;
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    height: 500px;
+.add-comment {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #efefef;
+  padding: 10px 14px;
 }
 
-.postPic{
-    background-color: black;
-    display: flex;
-    align-items: center;
+.add-comment .material-symbols-outlined {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #8e8e8e;
 }
 
-.postPic img{
-    object-fit: contain;
-    width: 100%;
+.add-comment input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 8px 0;
+  background-color: transparent;
 }
 
-.details{
-    width: 100%;
-    height: inherit;
-    display: flex;
+.add-comment .comment-btn {
+  border: none;
+  background-color: transparent;
+  color: #0095f6;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.add-comment .comment-btn:hover {
+  opacity: 0.8;
+}
+
+.showComment {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.showComment .container {
+  display: flex;
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 900px;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.showComment .postPic {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  overflow: hidden;
+}
+
+.showComment .postPic img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.showComment .details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #dbdbdb;
+}
+
+.showComment .details .card-header {
+  padding: 14px;
+  border-bottom: 1px solid #efefef;
+  flex-shrink: 0;
+}
+
+.showComment .details .comment-section {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 14px;
+  border-bottom: 1px solid #efefef;
+}
+
+.showComment .details .comment-section .comm {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #262626;
+}
+
+.showComment .details .comment-section .commenter {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.showComment .details .card-content {
+  padding: 14px;
+  border-top: 1px solid #efefef;
+  flex-shrink: 0;
+}
+
+.showComment .details .add-comment {
+  border-top: 1px solid #efefef;
+  padding: 10px 14px;
+  flex-shrink: 0;
+}
+
+.close-comment {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  color: white;
+  font-size: 32px;
+}
+
+.close-comment .material-symbols-outlined-comment {
+  font-size: 32px;
+}
+
+@media (max-width: 768px) {
+  .showComment .container {
     flex-direction: column;
-}
+    height: 90vh;
+    max-width: 95%;
+  }
 
-.comment-section{
-    flex-grow: 4;
-    text-align: left;
-    margin-left: 10px;
-}
+  .showComment .postPic {
+    height: 50%;
+    max-height: 300px;
+    border-bottom: 1px solid #dbdbdb;
+  }
 
-.close-comment{
-    position: fixed;
-    top: 1%;
-    right: 5%;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+  .showComment .details {
+    height: 50%;
+    border-left: none;
+  }
 
-
-.material-symbols-outlined-comment {
-    font-size: 50px;
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 700,
-  'GRAD' 0,
-  'opsz' 48
+  .close-comment {
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+  }
+  .close-comment .material-symbols-outlined-comment {
+    font-size: 28px;
+  }
 }

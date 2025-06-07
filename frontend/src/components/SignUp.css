@@ -1,63 +1,138 @@
-.signUp{
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB1lN1hGZAj0MpZ1ZoN7tt7q38JyzTvjmSMQ&usqp=CAU");
-    background-size: cover;
-    flex: 1;
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #e8eaf6;
+}
+
+.signUp {
+    background-color: #fafafa;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 40px 0;
+    box-sizing: border-box;
+    background-image: url("../img/connor-coyne-OgqWLzWRSaI-unsplash.jpg");
+    background-size: cover;
+    background-position: center;
 }
 
-.form{
-    background-color: #fff;
-    padding: 30px;
-    border: 1px solid rgb(129, 121, 121);
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.form {
+    background-color: white;
+    padding: 20px 40px;
+    border: 1px solid var(--border-color);
     border-radius: 1px;
-    
-}
-.signUpLogo{
-    width: 200px;
-    object-fit: contain;
-    padding: 10px 0px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.loginPara{
-    color: rgba(var(--f52,142,142,142),1);
+.signUpLogo {
+    width: 175px;
+    object-fit: contain;
+    margin: 15px 0;
+}
+
+.loginPara {
+    color: #8e8e8e;
     font-size: 17px;
     font-weight: 600;
-    line-height: 20px;
-    margin: 0px 40px 20px 40px;
+    line-height: 1.4;
+    margin: 0 0 20px;
+    text-align: center;
 }
 
-input{
-    padding: 5px;
-    margin: 3px 0px;
-    outline: none;
-    font-size: 16px;
+.form > div {
+    width: 100%;
+    margin-bottom: 6px;
+}
+
+.form input[type="email"],
+.form input[type="text"],
+.form input[type="password"] {
+    padding: 9px 8px;
+    margin: 3px 0;
+    background-color: #fafafa;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    font-size: 12px;
     width: 100%;
     box-sizing: border-box;
 }
 
-.form > div{
-    width: 80%;
-    margin: auto;
+.form input[type="email"]:focus,
+.form input[type="text"]:focus,
+.form input[type="password"]:focus {
+    border: 1px solid #a8a8a8;
+    outline: none;
 }
 
-#submit-btn{
-    background-color: #1773EA;
+#submit-btn {
+ background-color: #28a745;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     color: white;
-    font-weight: bold;
-    padding: 5px 10px;
-    width: 80%;
+    font-weight: 600;
+    padding: 12px 25px;
     cursor: pointer;
-    margin-top: 8px;
+    margin-top: 20px;
+    width: 100%;
+    font-size: 1.05em;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
 }
 
-.form2{
-    background-color: #fff;
-    padding: 30px;
-    margin-top: 5px;
-    border: 1px solid rgb(129, 121, 121);
+#submit-btn:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+#submit-btn:active {
+    transform: translateY(0);
+}
+
+.form2 {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid var(--border-color);
     border-radius: 1px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 14px;
+}
+
+.terms {
+    color: #8e8e8e;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 15px 0;
+    text-align: center;
+}
+
+/* Fix for small screens */
+@media (max-width: 450px) {
+    .form-container {
+        width: 90%;
     }
+    
+    .form, .form2 {
+        padding: 20px;
+    }
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+

@@ -5,14 +5,13 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
+  var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [comment, setComment] = useState("");
   const [show, setShow] = useState(false);
   const [item, setItem] = useState([]);
 
-  // Toast functions
   const notifyA = (msg) => toast.error(msg);
   const notifyB = (msg) => toast.success(msg);
 
@@ -20,23 +19,30 @@ export default function Home() {
     const token = localStorage.getItem("jwt");
     if (!token) {
       navigate("./signup");
+      return;
     }
 
-    // Fetching all posts
     fetch("http://localhost:5000/allposts", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((result) => {
         console.log(result);
         setData(result);
       })
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => {
+        console.log(err);
+        notifyA("Failed to fetch posts. Please try again.");
+      });
+  }, [navigate]);
 
-  // to show and hide comments
   const toggleComment = (posts) => {
     if (show) {
       setShow(false);
@@ -57,19 +63,32 @@ export default function Home() {
         postId: id,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((result) => {
-        const newData = data.map((posts) => {
-          if (posts._id == result._id) {
+        const newData = data.map((post) => {
+          if (post._id === result._id) {
             return result;
           } else {
-            return posts;
+            return post;
           }
         });
         setData(newData);
+        if (show && item._id === result._id) {
+          setItem(result);
+        }
         console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+        notifyA("Failed to like post.");
       });
   };
+
   const unlikePost = (id) => {
     fetch("http://localhost:5000/unlike", {
       method: "put",
@@ -81,21 +100,32 @@ export default function Home() {
         postId: id,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((result) => {
-        const newData = data.map((posts) => {
-          if (posts._id == result._id) {
+        const newData = data.map((post) => {
+          if (post._id === result._id) {
             return result;
           } else {
-            return posts;
+            return post;
           }
         });
         setData(newData);
+        if (show && item._id === result._id) {
+          setItem(result);
+        }
         console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+        notifyA("Failed to unlike post.");
       });
   };
 
-  // function to make comment
   const makeComment = (text, id) => {
     fetch("http://localhost:5000/comment", {
       method: "put",
@@ -108,34 +138,44 @@ export default function Home() {
         postId: id,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((result) => {
-        const newData = data.map((posts) => {
-          if (posts._id == result._id) {
+        const newData = data.map((post) => {
+          if (post._id === result._id) {
             return result;
           } else {
-            return posts;
+            return post;
           }
         });
         setData(newData);
         setComment("");
         notifyB("Comment posted");
+        if (show && item._id === result._id) {
+          setItem(result);
+        }
         console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+        notifyA("Failed to post comment.");
       });
   };
 
   return (
     <div className="home">
-      {/* card */}
       {data.map((posts) => {
         return (
-          <div className="card">
-            {/* card header */}
+          <div className="card" key={posts._id}>
             <div className="card-header">
               <div className="card-pic">
                 <img
                   src={posts.postedBy.Photo ? posts.postedBy.Photo : picLink}
-                  alt=""
+                  alt="Profile"
                 />
               </div>
               <h5>
@@ -144,13 +184,12 @@ export default function Home() {
                 </Link>
               </h5>
             </div>
-            {/* card image */}
             <div className="card-image">
-              <img src={posts.photo} alt="" />
+              <img src={posts.photo} alt="Post" />
             </div>
 
-            {/* card content */}
             <div className="card-content">
+              <div style={{ display: "flex", alignItems: "center" }}>
               {posts.likes.includes(
                 JSON.parse(localStorage.getItem("user"))._id
               ) ? (
@@ -174,18 +213,18 @@ export default function Home() {
               )}
 
               <p>{posts.likes.length} Likes</p>
-              <p>{posts.body} </p>
+              </div>
+              <p className="card-body-text">{posts.body}</p>
               <p
                 style={{ fontWeight: "bold", cursor: "pointer" }}
                 onClick={() => {
                   toggleComment(posts);
                 }}
               >
-                View all comments
+                View all {posts.comments.length} comments
               </p>
             </div>
 
-            {/* add Comment */}
             <div className="add-comment">
               <span className="material-symbols-outlined">mood</span>
               <input
@@ -197,7 +236,7 @@ export default function Home() {
                 }}
               />
               <button
-                className="comment"
+                className="comment-btn"
                 onClick={() => {
                   makeComment(comment, posts._id);
                 }}
@@ -209,55 +248,50 @@ export default function Home() {
         );
       })}
 
-      {/* show Comment */}
       {show && (
         <div className="showComment">
           <div className="container">
             <div className="postPic">
-              <img src={item.photo} alt="" />
+              <img src={item.photo} alt="Post" />
             </div>
             <div className="details">
-              {/* card header */}
               <div
                 className="card-header"
                 style={{ borderBottom: "1px solid #00000029" }}
               >
                 <div className="card-pic">
                   <img
-                    src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8MnwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-                    alt=""
+                    src={item.postedBy.Photo ? item.postedBy.Photo : picLink}
+                    alt="Profile"
                   />
                 </div>
                 <h5>{item.postedBy.name}</h5>
               </div>
 
-              {/* commentSection */}
               <div
                 className="comment-section"
                 style={{ borderBottom: "1px solid #00000029" }}
               >
-                {item.comments.map((comment) => {
+                {item.comments.map((val) => {
                   return (
-                    <p className="comm">
+                    <p className="comm" key={val._id || Math.random()}>
                       <span
                         className="commenter"
                         style={{ fontWeight: "bolder" }}
                       >
-                        {comment.postedBy.name}{" "}
+                        {val.postedBy.name}{" "}
                       </span>
-                      <span className="commentText">{comment.comment}</span>
+                      <span className="commentText">{val.comment}</span>
                     </p>
                   );
                 })}
               </div>
 
-              {/* card content */}
               <div className="card-content">
                 <p>{item.likes.length} Likes</p>
-                <p>{item.body}</p>
+                <p className="card-body-text">{item.body}</p>
               </div>
 
-              {/* add Comment */}
               <div className="add-comment">
                 <span className="material-symbols-outlined">mood</span>
                 <input
@@ -269,10 +303,9 @@ export default function Home() {
                   }}
                 />
                 <button
-                  className="comment"
+                  className="comment-btn"
                   onClick={() => {
                     makeComment(comment, item._id);
-                    toggleComment();
                   }}
                 >
                   Post
