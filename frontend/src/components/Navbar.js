@@ -18,6 +18,9 @@ export default function Navbar({ login }) {
           <Link to="/searchUser">
           <li><i class="fa-solid fa-magnifying-glass"></i></li>
           </Link>
+          <Link to="/trending">
+            <i class="fa-solid fa-newspaper"></i>
+          </Link>
           <Link to="/profile">
             <li><i class="fa-solid fa-user"></i></li>
           </Link>

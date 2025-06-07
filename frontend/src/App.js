@@ -15,6 +15,7 @@ import Modal from "./components/Modal";
 import UserProfie from "./components/UserProfile";
 import MyFolliwngPost from "./components/MyFollowingPost";
 import Search from "./components/Search";
+import News from "./components/News";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/createPost" element={<Createpost />}></Route>
             <Route path="/profile/:userid" element={<UserProfie />}></Route>
             <Route path="/followingpost" element={<MyFolliwngPost />}></Route>
+            <Route path="/trending" element={<News />}></Route>
           </Routes>
           <ToastContainer theme="dark" />
 

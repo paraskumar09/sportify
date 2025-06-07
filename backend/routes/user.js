@@ -81,4 +81,18 @@ router.put("/uploadProfilePic", requireLogin, (req, res) => {
     })
 })
 
+router.put("/uploadSports", requireLogin, (req, res) => {
+    USER.findByIdAndUpdate(req.user._id, {
+        $set: { Sports: req.body.sports }
+    }, {
+        new: true
+    }).exec((err, result) => {
+        if (err) {
+            return res.status(422).json({ error: er })
+        } else {
+            res.json(result)
+        }
+    })
+})
+
 module.exports = router;

@@ -1,0 +1,720 @@
+/* General Styling & Background */
+body {
+    background-color: #f0f2f5; /* Light grey background for the whole page */
+    font-family: 'Inter', sans-serif; /* A modern, clean sans-serif font */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.news-section {
+    max-width: 1200px;
+    width: 95%;
+    margin: 30px auto; /* Increased margin for better spacing from top/bottom */
+    padding: 30px; /* More padding inside the section */
+    background-color: #ffffff; /* Clean white background */
+    border-radius: 12px; /* Slightly more rounded corners */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* More pronounced, softer shadow */
+    box-sizing: border-box;
+    /* min-height: 85vh; */ /* This might constrain the overall height and prevent natural page scrolling if content is very long */
+    height: auto;
+    /* REMOVE THIS: overflow: hidden; */ /* This was preventing scrolling */
+}
+
+/* Header Section */
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px; /* Increased space below header */
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0; /* Lighter border for subtlety */
+}
+
+.news-header h2 {
+    margin: 0;
+    color: #2c3e50; /* Darker, more professional text color */
+    font-size: 2.2rem; /* Larger, more prominent heading */
+    font-weight: 700;
+}
+
+/* Post News Button */
+.post-news-btn {
+    background-color: #28a745; /* Green for "add" action */
+    color: white;
+    border: none;
+    padding: 12px 25px; /* More comfortable padding */
+    border-radius: 8px; /* Slightly rounded */
+    cursor: pointer;
+    font-size: 1.1rem; /* Clearer button text */
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2); /* Soft shadow for button */
+}
+
+.post-news-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
+}
+
+.post-news-btn .material-symbols-outlined {
+    font-size: 1.3rem; /* Icon size */
+}
+
+/* All News Container (Grid Layout) */
+.all-news-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adaptive columns */
+    gap: 30px; /* Increased gap between news cards */
+    /* REMOVED: height: auto; and overflow: visible; from here too, they were not needed with the new approach */
+    padding: 10px 0; /* Add some vertical padding for content */
+    /* ADDED: Max height and overflow for the scrollable content area */
+    max-height: calc(85vh - 120px); /* Adjust this value based on header height + padding in news-section */
+    /* This calculation attempts to make the news-container take up the remaining space inside news-section and allow its own scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 15px; /* Add padding for scrollbar, if present */
+}
+
+/* Scrollbar Styling (optional, but good for aesthetics) */
+.all-news-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.all-news-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.all-news-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.all-news-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+/* News Card */
+.news-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px; /* Consistent rounded corners */
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07); /* Softer shadow */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column; /* Allows content to push footer down */
+    min-height: 250px; /* Ensure cards have a decent minimum height */
+}
+
+.news-card:hover {
+    transform: translateY(-5px); /* More noticeable lift */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+.news-card-header {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px; /* More padding */
+    border-bottom: 1px solid #f0f0f0; /* Lighter border */
+    background-color: #fcfcfc; /* Very light background */
+}
+
+.news-card-pic {
+    margin-right: 15px; /* More space */
+}
+
+.news-card-pic img {
+    width: 50px; /* Slightly larger profile pictures */
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #6c5ce7; /* A subtle, distinct border color */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.news-card-info h5 {
+    margin: 0 0 4px 0;
+}
+
+.news-card-info h5 a {
+    color: #34495e; /* Darker text for names */
+    text-decoration: none;
+    font-size: 1.1rem; /* Slightly larger name */
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.news-card-info h5 a:hover {
+    color: #007bff; /* Highlight on hover */
+    text-decoration: underline;
+}
+
+.news-sport-tag {
+    display: inline-block;
+    padding: 4px 10px; /* More padding */
+    background-color: #e6f7ff;
+    color: #007bff; /* Blue for category tags */
+    border-radius: 15px; /* More pill-shaped */
+    font-size: 0.8rem; /* Slightly smaller, clean font */
+    font-weight: 600;
+    text-transform: uppercase; /* Uppercase for tags */
+    letter-spacing: 0.5px;
+}
+
+.delete-icon {
+    cursor: pointer;
+    color: #dc3545; /* Red for delete */
+    margin-left: auto; /* Pushes delete icon to the right */
+    padding: 8px; /* Larger clickable area */
+    border-radius: 50%;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-size: 1.4rem; /* Larger icon */
+}
+
+.delete-icon:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #c82333;
+}
+
+.news-card-content {
+    padding: 20px;
+    cursor: pointer;
+    background-color: #ffffff;
+    flex-grow: 1; /* Allows content to fill available space */
+    display: -webkit-box; /* For truncation */
+    -webkit-line-clamp: 4; /* Show max 4 lines before truncation */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for truncated text */
+}
+
+.news-card-content p {
+    margin: 0;
+    line-height: 1.7; /* Improved line spacing */
+    color: #495057; /* Slightly softer text color */
+    font-size: 1rem;
+}
+
+.news-card-footer {
+    padding: 12px 20px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #fcfcfc;
+}
+
+.news-timestamp {
+    color: #888; /* Softer timestamp color */
+    font-size: 0.8rem; /* Slightly smaller */
+    margin: 0;
+}
+
+/* No News Message */
+.no-news {
+    grid-column: 1 / -1; /* Span across all columns in the grid */
+    text-align: center;
+    padding: 60px 20px; /* More padding */
+    background-color: #f8f9fa; /* Light background */
+    color: #555;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    border: 1px dashed #ced4da; /* Dashed border for a friendly empty state */
+}
+
+.no-news p {
+    font-size: 1.3rem; /* Larger text */
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 15px;
+}
+
+/* Modal Styling */
+.news-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly lighter backdrop */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px); /* Subtle blur effect */
+}
+
+.news-modal-content {
+    background-color: #ffffff;
+    width: 90%; /* Slightly wider default */
+    max-width: 650px; /* Increased max-width */
+    padding: 30px; /* More padding inside modal */
+    border-radius: 15px; /* More rounded */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); /* Stronger, deeper shadow */
+    position: relative;
+    box-sizing: border-box;
+    animation: fadeIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* More dynamic animation */
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95) translateY(-20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.news-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 18px;
+    margin-bottom: 25px; /* More space */
+}
+
+.news-modal-header h3 {
+    margin: 0;
+    font-size: 1.8rem; /* Larger modal title */
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.news-modal-user-info {
+    display: flex;
+    align-items: center;
+}
+
+.news-modal-user-info img {
+    width: 55px; /* Larger profile pic in modal */
+    height: 55px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    border: 3px solid #6c5ce7;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.news-modal-user-info div h4 {
+    margin: 0;
+    font-size: 1.3rem; /* Larger name */
+    color: #34495e;
+    font-weight: 600;
+}
+
+.news-modal-user-info div .news-sport-tag {
+    margin-top: 5px; /* Space from name */
+}
+
+.close-icon {
+    cursor: pointer;
+    font-size: 32px; /* Larger close icon */
+    color: #777;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-icon:hover {
+    color: #333;
+    transform: rotate(90deg); /* Spin on hover */
+}
+
+.news-modal-body {
+    font-size: 1.05rem; /* Slightly larger body text */
+    line-height: 1.8; /* More comfortable line height */
+    color: #495057;
+    flex-grow: 1; /* Allow content to grow */
+    overflow-y: auto; /* Enable scrolling for long content */
+    max-height: 400px; /* Max height for scrollable content */
+}
+
+.news-modal-body p {
+    margin-bottom: 15px;
+    white-space: pre-wrap;
+}
+
+.news-modal-body .news-timestamp {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+/* Post News Modal Specifics */
+.post-modal .news-modal-body {
+    max-height: none; /* No max height for posting content */
+    overflow-y: visible;
+}
+
+.form-group {
+    margin-bottom: 20px; /* More space between form groups */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px; /* More space below label */
+    font-weight: 600;
+    color: #34495e; /* Darker label text */
+    font-size: 1.05rem;
+}
+
+.sports-select {
+    width: 100%;
+    padding: 12px; /* More padding */
+    border: 1px solid #ced4da; /* Lighter border */
+    border-radius: 8px; /* Consistent rounded corners */
+    font-size: 1rem;
+    background-color: #f8f9fa; /* Light grey background for select */
+    color: #34495e;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.sports-select:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.news-textarea {
+    width: 100%;
+    min-height: 150px; /* Taller textarea */
+    padding: 15px; /* More padding */
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    resize: vertical;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #495057;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: #f8f9fa;
+}
+
+.news-textarea::placeholder {
+    color: #a0a0a0;
+}
+
+.news-textarea:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.modal-footer-news {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px; /* More padding */
+    margin-top: 30px; /* More space */
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px; /* Space between buttons */
+}
+
+/* Modal Buttons (reusing post-news-btn styling where appropriate) */
+.modal-footer-news .post-news-btn {
+    background-color: #007bff; /* Primary blue for post */
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.modal-footer-news .post-news-btn:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+}
+
+.cancel-btn {
+    background-color: #6c757d; /* Grey for cancel */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.2);
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(108, 117, 125, 0.3);
+}
+
+.delete-news-btn {
+    background-color: #dc3545; /* Red for delete */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.2);
+}
+
+.delete-news-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(220, 53, 69, 0.3);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .news-section {
+        padding: 25px;
+    }
+    .news-card {
+        min-height: 220px;
+    }
+    .all-news-container {
+        max-height: calc(85vh - 100px); /* Adjust max-height for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .news-section {
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 10px;
+    }
+
+    .news-header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 25px;
+    }
+
+    .news-header h2 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .post-news-btn {
+        width: 100%; /* Full width button */
+        justify-content: center;
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .all-news-container {
+        grid-template-columns: 1fr; /* Stack cards vertically */
+        gap: 25px;
+        max-height: calc(85vh - 150px); /* Further adjust max-height for tablets */
+    }
+
+    .news-card {
+        min-height: auto; /* Allow height to be dynamic */
+        border-radius: 8px;
+    }
+
+    .news-card-header {
+        padding: 15px;
+    }
+
+    .news-card-pic img {
+        width: 45px;
+        height: 45px;
+        border-width: 2px;
+    }
+
+    .news-card-info h5 a {
+        font-size: 1rem;
+    }
+
+    .news-sport-tag {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+    }
+
+    .delete-icon {
+        font-size: 1.2rem;
+        padding: 6px;
+    }
+
+    .news-card-content {
+        padding: 15px;
+        -webkit-line-clamp: 5; /* Allow more lines on smaller screens */
+    }
+
+    .news-card-content p {
+        font-size: 0.95rem;
+    }
+
+    .news-timestamp {
+        font-size: 0.75rem;
+    }
+
+    .news-modal-content {
+        padding: 25px;
+        border-radius: 12px;
+    }
+
+    .news-modal-header h3 {
+        font-size: 1.6rem;
+    }
+
+    .news-modal-user-info img {
+        width: 50px;
+        height: 50px;
+        border-width: 2px;
+    }
+
+    .news-modal-user-info div h4 {
+        font-size: 1.2rem;
+    }
+
+    .close-icon {
+        font-size: 28px;
+    }
+
+    .news-modal-body {
+        font-size: 1rem;
+        max-height: 300px; /* Reduce max height for smaller screens */
+    }
+
+    .form-group label {
+        font-size: 1rem;
+    }
+
+    .sports-select, .news-textarea {
+        padding: 10px;
+        font-size: 0.95rem;
+        border-radius: 6px;
+    }
+
+    .news-textarea {
+        min-height: 120px;
+    }
+
+    .modal-footer-news {
+        flex-direction: column; /* Stack buttons */
+        gap: 12px;
+        margin-top: 25px;
+    }
+
+    .modal-footer-news .post-news-btn,
+    .modal-footer-news .cancel-btn,
+    .modal-footer-news .delete-news-btn {
+        width: 100%;
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .news-section {
+        padding: 15px;
+        margin: 15px auto;
+        border-radius: 8px;
+    }
+
+    .news-header h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .post-news-btn {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    .all-news-container {
+        max-height: calc(85vh - 180px); /* Further adjust max-height for mobile */
+    }
+
+    .news-card-header {
+        padding: 12px;
+    }
+
+    .news-card-pic img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .news-card-info h5 a {
+        font-size: 0.95rem;
+    }
+
+    .news-sport-tag {
+        font-size: 0.7rem;
+        padding: 2px 6px;
+    }
+
+    .delete-icon {
+        font-size: 1rem;
+        padding: 4px;
+    }
+
+    .news-card-content {
+        padding: 12px;
+    }
+
+    .news-card-content p {
+        font-size: 0.9rem;
+    }
+
+    .news-timestamp {
+        font-size: 0.65rem;
+    }
+
+    .news-modal-content {
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .news-modal-header h3 {
+        font-size: 1.4rem;
+    }
+
+    .news-modal-user-info img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .news-modal-user-info div h4 {
+        font-size: 1.1rem;
+    }
+
+    .close-icon {
+        font-size: 26px;
+    }
+
+    .news-modal-body {
+        font-size: 0.9rem;
+    }
+
+    .form-group label {
+        font-size: 0.95rem;
+    }
+
+    .sports-select, .news-textarea {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .news-textarea {
+        min-height: 100px;
+    }
+
+    .modal-footer-news {
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .modal-footer-news .post-news-btn,
+    .modal-footer-news .cancel-btn,
+    .modal-footer-news .delete-news-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}

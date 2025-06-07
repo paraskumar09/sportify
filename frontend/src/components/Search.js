@@ -159,16 +159,14 @@ const Search = () => {
       </div>
 
     <div className="home">
-      {/* card */}
       {data.map((posts) => {
         return (
-          <div className="card">
-            {/* card header */}
+          <div className="card" key={posts._id}>
             <div className="card-header">
               <div className="card-pic">
                 <img
                   src={posts.postedBy.Photo ? posts.postedBy.Photo : picLink}
-                  alt=""
+                  alt="Profile"
                 />
               </div>
               <h5>
@@ -177,13 +175,12 @@ const Search = () => {
                 </Link>
               </h5>
             </div>
-            {/* card image */}
             <div className="card-image">
-              <img src={posts.photo} alt="" />
+              <img src={posts.photo} alt="Post" />
             </div>
 
-            {/* card content */}
             <div className="card-content">
+              <div style={{ display: "flex", alignItems: "center" }}>
               {posts.likes.includes(
                 JSON.parse(localStorage.getItem("user"))._id
               ) ? (
@@ -207,18 +204,18 @@ const Search = () => {
               )}
 
               <p>{posts.likes.length} Likes</p>
-              <p>{posts.body} </p>
+              </div>
+              <p className="card-body-text">{posts.body}</p>
               <p
                 style={{ fontWeight: "bold", cursor: "pointer" }}
                 onClick={() => {
                   toggleComment(posts);
                 }}
               >
-                View all comments
+                View all {posts.comments.length} comments
               </p>
             </div>
 
-            {/* add Comment */}
             <div className="add-comment">
               <span className="material-symbols-outlined">mood</span>
               <input
@@ -230,7 +227,7 @@ const Search = () => {
                 }}
               />
               <button
-                className="comment"
+                className="comment-btn"
                 onClick={() => {
                   makeComment(comment, posts._id);
                 }}
@@ -242,55 +239,50 @@ const Search = () => {
         );
       })}
 
-      {/* show Comment */}
       {show && (
         <div className="showComment">
           <div className="container">
             <div className="postPic">
-              <img src={item.photo} alt="" />
+              <img src={item.photo} alt="Post" />
             </div>
             <div className="details">
-              {/* card header */}
               <div
                 className="card-header"
                 style={{ borderBottom: "1px solid #00000029" }}
               >
                 <div className="card-pic">
                   <img
-                    src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8MnwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-                    alt=""
+                    src={item.postedBy.Photo ? item.postedBy.Photo : picLink}
+                    alt="Profile"
                   />
                 </div>
                 <h5>{item.postedBy.name}</h5>
               </div>
 
-              {/* commentSection */}
               <div
                 className="comment-section"
                 style={{ borderBottom: "1px solid #00000029" }}
               >
-                {item.comments.map((comment) => {
+                {item.comments.map((val) => {
                   return (
-                    <p className="comm">
+                    <p className="comm" key={val._id || Math.random()}>
                       <span
                         className="commenter"
                         style={{ fontWeight: "bolder" }}
                       >
-                        {comment.postedBy.name}{" "}
+                        {val.postedBy.name}{" "}
                       </span>
-                      <span className="commentText">{comment.comment}</span>
+                      <span className="commentText">{val.comment}</span>
                     </p>
                   );
                 })}
               </div>
 
-              {/* card content */}
               <div className="card-content">
                 <p>{item.likes.length} Likes</p>
-                <p>{item.body}</p>
+                <p className="card-body-text">{item.body}</p>
               </div>
 
-              {/* add Comment */}
               <div className="add-comment">
                 <span className="material-symbols-outlined">mood</span>
                 <input
@@ -302,10 +294,9 @@ const Search = () => {
                   }}
                 />
                 <button
-                  className="comment"
+                  className="comment-btn"
                   onClick={() => {
                     makeComment(comment, item._id);
-                    toggleComment();
                   }}
                 >
                   Post

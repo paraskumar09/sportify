@@ -10,6 +10,9 @@ const postSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    Sports: {
+        type: String,
+    },
     likes: [{ type: ObjectId, ref: "USER" }],
     comments: [{
         comment: { type: String },
