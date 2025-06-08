@@ -1,272 +1,368 @@
+/* General Styling & Background */
+body {
+    background-color: #f0f2f5; /* Consistent light grey background */
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Home Page Container */
+.home-page-container {
+    max-width: 900px; /* Wider container for the whole home page */
+    margin: 0 auto; /* Center the content */
+    padding: 20px;
+}
+
+/* Home Header (for "Latest Posts" and "Add News" button) */
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    margin-bottom: 30px; /* Space below header */
+    border-bottom: 1px solid #e0e0e0; /* Subtle separator */
+}
+
+.home-header .home-title {
+    font-size: 2rem;
+    color: #343a40;
+    font-weight: 700;
+    margin: 0;
+}
+
+.add-news-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: #28a745; /* Green for "Add News" */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Pill-shaped button */
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.add-news-btn:hover {
+    background-color: #218838;
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
+    transform: translateY(-2px);
+}
+
+.add-news-btn .material-symbols-outlined {
+    font-size: 22px;
+}
+
+
+/* Loading Spinner and No Posts Message */
+.loading-spinner, .no-posts-message, .end-of-feed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px; /* Adjusted height for less visual interruption */
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #007bff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* Home Feed (Post Cards) - CHANGED FOR SINGLE COLUMN */
 .home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: white;
-  min-height: 100vh;
-  box-sizing: border-box;
+    display: flex; /* Changed from grid to flex */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center cards horizontally */
+    gap: 30px; /* Space between cards */
+    padding-bottom: 50px; /* Extra padding for the observer target */
 }
 
 .card {
-  background-color: #fff;
-  border: 1px solid #dbdbdb;
-  border-radius: 8px;
-  margin-bottom: 25px;
-  width: 100%;
-  max-width: 500px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  box-sizing: border-box;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); /* Soft shadow */
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s ease-in-out; /* Hover effect */
+    width: 100%; /* Take full width of its flex container */
+    max-width: 600px; /* Max width for single column readability */
+}
+
+.card:hover {
+    transform: translateY(-5px);
 }
 
 .card-header {
-  display: flex;
-  align-items: center;
-  padding: 14px;
-  border-bottom: 1px solid #efefef;
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f8f9fa;
+    position: relative; /* For delete icon positioning */
 }
 
-.card-header .card-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.card-pic {
+    flex-shrink: 0;
 }
 
-.card-header .card-pic img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.card-pic img {
+    width: 42px; /* Consistent avatar size */
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
 }
 
-.card-header h5 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 600;
+.card-username {
+    margin: 0 0 0 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #343a40;
 }
 
-.card-header h5 a {
-  text-decoration: none;
-  color: #262626;
+.card-username a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-username a:hover {
+    text-decoration: underline;
+}
+
+.delete-icon {
+    font-size: 24px;
+    color: #dc3545; /* Red for delete */
+    cursor: pointer;
+    margin-left: auto; /* Push to far right */
+    opacity: 0.7;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.delete-icon:hover {
+    opacity: 1;
+    transform: scale(1.1);
 }
 
 .card-image {
-  width: 100%;
-  max-height: 600px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #efefef;
+    width: 100%;
+    overflow: hidden;
+    background-color: #f0f0f0; /* Placeholder background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-image img {
-  width: 100%;
-  height: auto;
-  display: block;
+    width: 100%;
+    height: auto; /* Auto height to maintain aspect ratio */
+    display: block;
 }
 
 .card-content {
-  margin-left: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  /* justify-content: space-between; */
-  gap: 1px;
-  text-align: left;
+    padding: 15px 20px;
 }
 
-.card-content .material-symbols-outlined {
-  cursor: pointer;
-  font-size: 28px;
-  color: #262626;
-  vertical-align: middle;
-  margin-right: 8px;
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
 }
 
-.card-content .material-symbols-outlined-red {
-  color: #ed4956;
-    font-variation-settings:
-  'FILL' 1,
-  'wght' 700,
-  'GRAD' 0,
-  'opsz' 48
+.card-actions .material-symbols-outlined {
+    font-size: 28px; /* Larger icons */
+    cursor: pointer;
+    color: #6c757d; /* Muted icon color */
+    transition: color 0.2s ease;
 }
 
-.card-content p {
-  margin: 8px 0;
-  font-size: 14px;
-  color: #262626;
+.card-actions .material-symbols-outlined:hover {
+    color: #343a40;
 }
 
-.card-content .card-body-text {
-  color: #555;
-  margin-top: 10px;
+.card-actions .material-symbols-outlined.liked {
+    color: #e30707; /* Red for liked heart */
+}
+
+.card-actions .material-symbols-outlined.liked:hover {
+    color: #b30000;
+}
+
+.likes-count {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.95rem;
+}
+
+.card-body-text {
+    font-size: 1rem;
+    color: #495057;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    word-wrap: break-word; /* Ensure long words wrap */
+}
+
+.caption-username {
+    font-weight: 600;
+    color: #343a40;
+    margin-right: 5px;
+}
+
+.post-sport {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+
+.view-comments-link {
+    color: #007bff; /* Link color for comments */
+    font-size: 0.9rem;
+    margin-top: 10px;
+    display: block; /* Ensures it takes full width */
+}
+
+.view-comments-link:hover {
+    text-decoration: underline;
 }
 
 .add-comment {
-  display: flex;
-  align-items: center;
-  border-top: 1px solid #efefef;
-  padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px 15px;
+    border-top: 1px solid #f0f2f5;
+    gap: 10px;
 }
 
 .add-comment .material-symbols-outlined {
-  font-size: 24px;
-  margin-right: 10px;
-  color: #8e8e8e;
+    font-size: 24px;
+    color: #6c757d;
+    cursor: pointer;
 }
 
-.add-comment input {
-  flex-grow: 1;
-  border: none;
-  outline: none;
-  font-size: 14px;
-  padding: 8px 0;
-  background-color: transparent;
+.add-comment input[type="text"] {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 8px 0;
+    font-size: 0.95rem;
+    color: #495057;
+}
+
+.add-comment input[type="text"]::placeholder {
+    color: #adb5bd;
 }
 
 .add-comment .comment-btn {
-  border: none;
-  background-color: transparent;
-  color: #0095f6;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 8px 10px;
-  font-size: 14px;
+    background: none;
+    border: none;
+    color: #007bff;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
 }
 
 .add-comment .comment-btn:hover {
-  opacity: 0.8;
+    background-color: #e6f2ff;
 }
 
-.showComment {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  box-sizing: border-box;
-  padding: 20px;
+/* Infinite scroll sentinel */
+.scroll-sentinel {
+    height: 1px; /* Very small height */
+    width: 100%;
+    margin-top: -1px; /* Pull it up slightly to ensure it's observed */
 }
 
-.showComment .container {
-  display: flex;
-  background-color: #fff;
-  border-radius: 8px;
-  max-width: 900px;
-  width: 100%;
-  height: 80vh;
-  overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-}
 
-.showComment .postPic {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  overflow: hidden;
-}
-
-.showComment .postPic img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.showComment .details {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  border-left: 1px solid #dbdbdb;
-}
-
-.showComment .details .card-header {
-  padding: 14px;
-  border-bottom: 1px solid #efefef;
-  flex-shrink: 0;
-}
-
-.showComment .details .comment-section {
-  flex-grow: 1;
-  overflow-y: auto;
-  padding: 14px;
-  border-bottom: 1px solid #efefef;
-}
-
-.showComment .details .comment-section .comm {
-  margin-bottom: 8px;
-  font-size: 14px;
-  line-height: 1.4;
-  color: #262626;
-}
-
-.showComment .details .comment-section .commenter {
-  margin-right: 5px;
-  font-weight: bold;
-}
-
-.showComment .details .card-content {
-  padding: 14px;
-  border-top: 1px solid #efefef;
-  flex-shrink: 0;
-}
-
-.showComment .details .add-comment {
-  border-top: 1px solid #efefef;
-  padding: 10px 14px;
-  flex-shrink: 0;
-}
-
-.close-comment {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  color: white;
-  font-size: 32px;
-}
-
-.close-comment .material-symbols-outlined-comment {
-  font-size: 32px;
-}
-
+/* Responsive adjustments for Home page */
 @media (max-width: 768px) {
-  .showComment .container {
-    flex-direction: column;
-    height: 90vh;
-    max-width: 95%;
-  }
+    .home-page-container {
+        padding: 15px;
+    }
+    .home-header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+    .home-header .home-title {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    .add-news-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+    .home {
+        gap: 20px;
+    }
+    .card {
+        max-width: 100%; /* Allow cards to fill width on smaller screens */
+    }
+    .card-image img {
+        max-height: 350px; /* Constrain image height on mobile */
+        object-fit: cover; /* Crop to fill */
+    }
+}
 
-  .showComment .postPic {
-    height: 50%;
-    max-height: 300px;
-    border-bottom: 1px solid #dbdbdb;
-  }
-
-  .showComment .details {
-    height: 50%;
-    border-left: none;
-  }
-
-  .close-comment {
-    top: 10px;
-    right: 10px;
-    font-size: 28px;
-  }
-  .close-comment .material-symbols-outlined-comment {
-    font-size: 28px;
-  }
+@media (max-width: 480px) {
+    .home-page-container {
+        padding: 10px;
+    }
+    .home-header .home-title {
+        font-size: 1.5rem;
+    }
+    .add-news-btn {
+        font-size: 0.9rem;
+        padding: 7px 12px;
+    }
+    .card {
+        border-radius: 8px;
+    }
+    .card-header {
+        padding: 12px 15px;
+    }
+    .card-pic img {
+        width: 38px;
+        height: 38px;
+    }
+    .card-username {
+        font-size: 1rem;
+    }
+    .card-actions .material-symbols-outlined {
+        font-size: 24px;
+    }
+    .likes-count, .card-body-text, .view-comments-link, .post-sport {
+        font-size: 0.9rem;
+    }
+    .add-comment {
+        padding: 8px 15px 12px;
+    }
+    .add-comment input[type="text"] {
+        font-size: 0.85rem;
+    }
 }

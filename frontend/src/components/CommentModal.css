@@ -1,0 +1,345 @@
+/* Comment Modal Overlay */
+.comment-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease-out; /* Reuse fade-in animation */
+}
+
+/* Comment Modal Container */
+.comment-modal-container {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    width: 95%; /* Responsive width */
+    max-width: 900px; /* Larger modal for comments */
+    display: flex;
+    flex-direction: row; /* Image on left, details on right */
+    max-height: 90vh; /* Max height of the modal */
+    overflow: hidden;
+    position: relative; /* For close button */
+}
+
+/* Post Image within Comment Modal */
+.comment-modal-container .postPic {
+    flex: 1; /* Takes equal space */
+    min-width: 40%; /* Minimum width for the image side */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    overflow: hidden; /* Ensure image doesn't overflow */
+    border-right: 1px solid #e0e0e0;
+}
+
+.comment-modal-container .postPic img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Contain the entire image */
+    display: block;
+}
+
+/* Comment Modal Details Section (Right Side) */
+.comment-modal-details {
+    flex: 1; /* Takes equal space */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Modal Card Header (User Info) */
+.comment-modal-details .modal-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f2f5;
+    margin-bottom: 15px;
+    flex-shrink: 0; /* Prevents header from shrinking */
+}
+
+.comment-modal-details .card-pic img {
+    width: 48px; /* Larger profile pic in modal */
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+.comment-modal-details h5 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #343a40;
+}
+
+/* Delete icon in modal header */
+.comment-modal-details .delete-icon {
+    font-size: 26px;
+    color: #dc3545;
+    cursor: pointer;
+    margin-left: auto;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.comment-modal-details .delete-icon:hover {
+    opacity: 1;
+}
+
+/* Comment Section Scrollable Area */
+.comment-section {
+    flex-grow: 1; /* Allows comments to take up available space */
+    overflow-y: auto; /* Enables scrolling for comments */
+    padding-right: 10px; /* Space for scrollbar */
+    margin-bottom: 15px; /* Space before actions */
+}
+
+.main-caption {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: #495057;
+}
+.caption-username {
+    font-weight: 600;
+    color: #343a40;
+    margin-right: 5px;
+}
+
+.comment-item {
+    margin-bottom: 8px;
+    line-height: 1.4;
+    color: #495057;
+}
+
+.commenter-username {
+    font-weight: 600;
+    color: #343a40;
+    margin-right: 5px;
+}
+
+.comment-text {
+    display: inline;
+}
+
+.no-comments-message {
+    color: #6c757d;
+    font-style: italic;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Like/Action Section */
+.comment-modal-actions {
+    flex-shrink: 0; /* Prevents shrinking */
+    padding-top: 15px;
+    border-top: 1px solid #f0f2f5;
+    margin-top: auto; /* Pushes it to the bottom */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.likes-and-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.comment-modal-actions .material-symbols-outlined {
+    font-size: 30px; /* Larger icons */
+    cursor: pointer;
+    color: #6c757d;
+    transition: color 0.2s ease;
+}
+
+.comment-modal-actions .material-symbols-outlined:hover {
+    color: #343a40;
+}
+
+.comment-modal-actions .material-symbols-outlined.liked {
+    color: #e30707;
+}
+
+.comment-modal-actions .material-symbols-outlined.liked:hover {
+    color: #b30000;
+}
+
+.comment-modal-actions .likes-count {
+    font-weight: 600;
+    color: #495057;
+    font-size: 1rem;
+}
+
+.modal-post-sport {
+    font-size: 0.95rem;
+    color: #6c757d;
+}
+
+/* Add Comment Input */
+.comment-modal-details .add-comment {
+    display: flex;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #f0f2f5;
+    gap: 10px;
+    flex-shrink: 0; /* Prevents shrinking */
+}
+
+.comment-modal-details .add-comment .material-symbols-outlined {
+    font-size: 26px;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.comment-modal-details .add-comment input[type="text"] {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #495057;
+}
+
+.comment-modal-details .add-comment input[type="text"]::placeholder {
+    color: #adb5bd;
+}
+
+.comment-modal-details .add-comment .comment-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.comment-modal-details .add-comment .comment-btn:hover {
+    background-color: #e6f2ff;
+}
+
+/* Close button for Comment Modal */
+.comment-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 32px; /* Larger close icon */
+    cursor: pointer;
+    color: #fff; /* White for better visibility against dark overlay */
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    z-index: 1001; /* Above the modal content */
+}
+
+.comment-modal-close:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive adjustments for Comment Modal */
+@media (max-width: 900px) {
+    .comment-modal-container {
+        flex-direction: column; /* Stack image and details vertically */
+        max-width: 550px; /* Adjust max width for stacked layout */
+        height: 90vh; /* Allow it to take more height */
+        overflow-y: auto; /* Enable scrolling for the whole modal */
+    }
+
+    .comment-modal-container .postPic {
+        min-width: unset; /* Remove min-width */
+        height: 300px; /* Fixed height for image when stacked */
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0; /* Separator for stacked view */
+    }
+
+    .comment-modal-details {
+        flex: unset; /* Remove flex-grow for details when stacked */
+        height: auto;
+    }
+
+    .comment-modal-details .modal-card-header,
+    .comment-modal-details .comment-section,
+    .comment-modal-details .comment-modal-actions,
+    .comment-modal-details .add-comment {
+        flex-shrink: unset; /* Allow shrinking in stacked view */
+    }
+}
+
+@media (max-width: 550px) {
+    .comment-modal-container {
+        border-radius: 12px;
+        max-width: 95%; /* Adjust for smaller screens */
+    }
+
+    .comment-modal-close {
+        font-size: 28px;
+        width: 36px;
+        height: 36px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .comment-modal-details {
+        padding: 15px;
+    }
+
+    .comment-modal-details .modal-card-header {
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    .comment-modal-details .card-pic img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .comment-modal-details h5 {
+        font-size: 1.1rem;
+    }
+
+    .comment-modal-details .delete-icon {
+        font-size: 22px;
+    }
+
+    .main-caption {
+        font-size: 0.95rem;
+    }
+
+    .comment-item {
+        font-size: 0.9rem;
+    }
+
+    .comment-modal-actions .material-symbols-outlined {
+        font-size: 26px;
+    }
+
+    .comment-modal-actions .likes-count {
+        font-size: 0.95rem;
+    }
+
+    .comment-modal-details .add-comment input[type="text"] {
+        font-size: 0.9rem;
+    }
+}
