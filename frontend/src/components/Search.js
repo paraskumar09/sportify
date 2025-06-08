@@ -355,6 +355,16 @@ const Search = () => {
                   />
                 </div>
                 <h5>{item.postedBy.name}</h5>
+                <div
+            className="close-comment"
+            onClick={() => {
+              toggleComment();
+            }}
+          >
+            <span className="material-symbols-outlined material-symbols-outlined-comment">
+              close
+            </span>
+          </div>
               </div>
 
               <div
@@ -402,16 +412,7 @@ const Search = () => {
               </div>
             </div>
           </div>
-          <div
-            className="close-comment"
-            onClick={() => {
-              toggleComment();
-            }}
-          >
-            <span className="material-symbols-outlined material-symbols-outlined-comment">
-              close
-            </span>
-          </div>
+          
         </div>
       )}
     </div>
