@@ -95,4 +95,52 @@ router.put("/uploadSports", requireLogin, (req, res) => {
     })
 })
 
+// to update user profile
+router.put("/updateuser", requireLogin, (req, res) => {
+    const { name, userName, Sports } = req.body;
+    
+    // Validate input
+    if (!name || !userName) {
+        return res.status(422).json({ error: "Name and username are required" });
+    }
+    
+    // Check if username is already taken by another user
+    USER.findOne({ 
+        userName: userName, 
+        _id: { $ne: req.user._id } // Exclude current user from check
+    })
+    .then(existingUser => {
+        if (existingUser) {
+            return res.status(422).json({ error: "Username already taken" });
+        }
+        
+        // Update user profile
+        USER.findByIdAndUpdate(
+            req.user._id,
+            {
+                $set: { 
+                    name: name,
+                    userName: userName,
+                    Sports: Sports || req.user.Sports
+                }
+            },
+            { new: true, select: "-password" } // Return updated document without password
+        )
+        .then(updatedUser => {
+            if (!updatedUser) {
+                return res.status(404).json({ error: "User not found" });
+            }
+            res.json(updatedUser);
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).json({ error: "Server error" });
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(500).json({ error: "Server error" });
+    });
+});
+
 module.exports = router;

@@ -10,8 +10,8 @@ router.get("/allnews", requireLogin, (req, res) => {
     // Get the current user's sports preference
     const userSports = req.user.Sports;
     
-    // If user has no sports preference, return all news
-    if (!userSports) {
+    // If user has no sports preference or it's set to "General", return all news
+    if (!userSports || userSports === "General") {
         NEWS.find()
             .populate("postedBy", "_id name Photo")
             .sort("-createdAt")
@@ -120,4 +120,5 @@ router.get("/sportsnews/:category", requireLogin, (req, res) => {
 });
 
 module.exports = router;
+
 
