@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./CreatePostModal.css"; // We'll create this CSS
+import "./CreatePostModal.css";
 import { toast } from 'react-toastify';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom"; // Not used directly in this component example, but keep if needed elsewhere
 
 // Props: isOpen, onClose, onPostSuccess
 export default function CreatePostModal({ isOpen, onClose, onPostSuccess }) {
@@ -13,7 +13,7 @@ export default function CreatePostModal({ isOpen, onClose, onPostSuccess }) {
     const [loading, setLoading] = useState(false); // For post submission
     const [imageLoading, setImageLoading] = useState(false); // For image upload
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate(); // Not used directly in this component example
 
     // Toast functions
     const notifyA = (msg) => toast.error(msg);
@@ -26,7 +26,7 @@ export default function CreatePostModal({ isOpen, onClose, onPostSuccess }) {
             setBody("");
             setImage(null);
             setUrl("");
-            setSports(""); // Reset to default if needed, or keep user's default sport
+            setSports("");
             setLoading(false);
             setImageLoading(false);
             // Reset image preview
@@ -40,17 +40,38 @@ export default function CreatePostModal({ isOpen, onClose, onPostSuccess }) {
     // Fetch user data on component mount (or when modal becomes open)
     useEffect(() => {
         if (isOpen) { // Only fetch user data when modal is open
-            fetch(`http://localhost:5000/user/${JSON.parse(localStorage.getItem("user"))._id}`, {
+            const storedUser = localStorage.getItem("user");
+            const storedJwt = localStorage.getItem("jwt");
+
+            if (!storedUser || !storedJwt) {
+                // Handle case where user/jwt is not in localStorage, e.g., redirect to login
+                console.warn("User or JWT not found in localStorage.");
+                // navigate("/signin"); // Uncomment if you have react-router-dom setup and want to redirect
+                return;
+            }
+
+            const userId = JSON.parse(storedUser)._id;
+
+            fetch(`http://localhost:5000/user/${userId}`, {
                 headers: {
-                    Authorization: "Bearer " + localStorage.getItem("jwt"),
+                    Authorization: "Bearer " + storedJwt,
                 },
             })
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            })
             .then((result) => {
                 setUser(result.user);
+                // Set default sport if user has one, otherwise "General"
                 setSports(result.user.Sports || "General");
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.error("Error fetching user data:", err);
+                notifyA("Failed to load user data.");
+            });
         }
     }, [isOpen]); // Depend on isOpen
 
@@ -74,7 +95,7 @@ export default function CreatePostModal({ isOpen, onClose, onPostSuccess }) {
                 if (data.error) {
                     notifyA(data.error);
                 } else {
-                    notifyB("Successfully Posted");
+                    notifyB("Successfully Posted!");
                     onClose(); // Close modal on success
                     if (onPostSuccess) {
                         onPostSuccess(); // Callback to refresh posts on Home page
@@ -82,14 +103,14 @@ export default function CreatePostModal({ isOpen, onClose, onPostSuccess }) {
                 }
             })
             .catch(err => {
-                console.log(err);
+                console.error("Error creating post:", err);
                 notifyA("Post creation failed.");
                 setLoading(false);
             });
         }
     }, [url, body, sports, onClose, onPostSuccess]);
 
-    // Function to handle image upload to Cloudinary
+    // Function to handle image upload to Cloudinary and then post creation
     const postDetails = () => {
         if (!image) {
             notifyA("Please select an image to post.");
@@ -117,7 +138,7 @@ export default function CreatePostModal({ isOpen, onClose, onPostSuccess }) {
             setImageLoading(false); // Image upload complete
         })
         .catch(err => {
-            console.log(err);
+            console.error("Cloudinary upload error:", err);
             notifyA("Image upload to Cloudinary failed.");
             setImageLoading(false);
             setLoading(false); // Stop overall loading if image upload fails
@@ -129,10 +150,10 @@ export default function CreatePostModal({ isOpen, onClose, onPostSuccess }) {
         if (file) {
             setImage(file);
             const output = document.getElementById("modalOutput");
-            if (output) { // Check if output element exists
+            if (output) {
                 output.src = URL.createObjectURL(file);
                 output.onload = function () {
-                    URL.revokeObjectURL(output.src);
+                    URL.revokeObjectURL(output.src); // Free up memory
                 };
             }
         } else {
@@ -151,7 +172,7 @@ export default function CreatePostModal({ isOpen, onClose, onPostSuccess }) {
         "General", "Football", "Basketball", "Tennis", "Cricket", "Badminton", "Volleyball", "Hockey", "Athletics", "Swimming", "Esports", "Other"
     ];
 
-    if (!isOpen) return null; // Don't render anything if modal is not open
+    if (!isOpen) return null;
 
     return (
         <div className="modal-overlay">
@@ -175,11 +196,11 @@ export default function CreatePostModal({ isOpen, onClose, onPostSuccess }) {
                 <div className="modal-main-div">
                     <div className="modal-image-upload-area">
                         <img
-                            id="modalOutput" // Unique ID for modal's image preview
+                            id="modalOutput"
                             src={image ? URL.createObjectURL(image) : placeholderImage}
                             alt="Upload Preview"
                         />
-                        {!image && <p>Click to select an image</p>}
+                        {!image && <p>Click or drag image to upload</p>}
                         <input
                             type="file"
                             accept="image/*"
@@ -197,21 +218,22 @@ export default function CreatePostModal({ isOpen, onClose, onPostSuccess }) {
                                 alt="User Profile"
                             />
                         </div>
-                        <h5>{user.name}</h5>
+                        <h5>{user.name || "Loading..."}</h5> {/* Display user name */}
                     </div>
 
                     {/* Caption Textarea */}
                     <textarea
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
-                        placeholder="Write a caption..."
+                        placeholder="Write a captivating caption for your post..."
+                        rows="4" // Initial rows
                     ></textarea>
 
                     {/* Sports Select Field */}
                     <div className="form-group">
-                        <label htmlFor="modalPostSports">Select Sport (Optional)</label>
+                        <label htmlFor="modalPostSports">Categorize Your Post</label>
                         <select
-                            id="modalPostSports" // Unique ID for modal's select
+                            id="modalPostSports"
                             value={sports}
                             onChange={(e) => setSports(e.target.value)}
                             className="sports-select"

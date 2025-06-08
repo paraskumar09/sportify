@@ -146,4 +146,38 @@ router.get("/myfollwingpost", requireLogin, (req, res) => {
         .catch(err => { console.log(err) })
 })
 
+// Get posts by sports category
+router.get("/sportsposts/:category", requireLogin, (req, res) => {
+    const sportsCategory = req.params.category;
+    
+    // If category is General, return all posts
+    if (sportsCategory === "General") {
+        POST.find()
+            .populate("postedBy", "_id name Photo")
+            .populate("comments.postedBy", "_id name")
+            .sort("-createdAt")
+            .then(posts => {
+                res.json(posts);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({ error: "Failed to fetch posts" });
+            });
+    } else {
+        // Find posts that match the specified sports category
+        POST.find({ Sports: sportsCategory })
+            .populate("postedBy", "_id name Photo")
+            .populate("comments.postedBy", "_id name")
+            .sort("-createdAt")
+            .then(posts => {
+                res.json(posts);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({ error: "Failed to fetch posts" });
+            });
+    }
+});
+
 module.exports = router
+

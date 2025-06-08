@@ -5,27 +5,32 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensure it's on top of everything */
-    backdrop-filter: blur(5px); /* Optional: blur background for modern feel */
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    animation: fadeInOverlay 0.3s ease-out;
 }
 
 /* Modal Content Container */
 .createPostModal-content {
-    background-color: #ffffff;
-    border-radius: 16px; /* Slightly more rounded for modal feel */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Stronger shadow for modal depth */
-    max-width: 650px; /* Slightly wider modal */
-    width: 90%; /* Responsive width */
-    max-height: 90vh; /* Max height of the modal itself */
-    overflow: hidden; /* Hide overflow of inner content */
+    background-color: #1a1a1a;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    /* KEY CHANGE: Reduced max-width and max-height for a smaller component */
+    max-width: 600px; /* Make the modal narrower */
+    max-height: 85vh; /* Allow some flexibility, but aim for less height */
+    width: 90%;
     display: flex;
     flex-direction: column;
-    animation: fadeIn 0.3s ease-out; /* Simple fade-in animation */
-    position: relative; /* For positioning close icon */
+    animation: fadeInModal 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    /* Further reduce scale if needed after other adjustments */
+    transform: scale(0.85); /* Adjust this value as needed, e.g., 0.8 to make it even smaller */
+    transform-origin: center center;
 }
 
 /* Modal Header */
@@ -33,101 +38,113 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 25px;
-    border-bottom: 1px solid #f0f2f5;
-    background: linear-gradient(to right, #ffffff, #fdfdfd);
-    flex-shrink: 0; /* Prevents shrinking */
+    padding: 18px 25px; /* Reduced padding */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(90deg, #2b2b2b, #222222);
+    flex-shrink: 0;
 }
 
 .modal-header h4 {
     margin: 0;
-    font-size: 1.6rem; /* Larger title for modal */
-    color: #343a40;
-    font-weight: 600;
+    font-size: 1.6rem; /* Slightly smaller font */
+    color: #f0f0f0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 #modal-post-btn {
     border: none;
-    background: #007bff;
+    background: linear-gradient(45deg, #007bff, #6f42c4);
     color: white;
-    font-weight: 500;
-    font-size: 1rem;
+    font-weight: 600;
+    font-size: 1rem; /* Slightly smaller font */
     cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 8px;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
-    margin-left: auto; /* Push Share button to the left of close icon */
-    margin-right: 20px; /* Space from close icon */
+    padding: 9px 18px; /* Reduced padding */
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+    margin-left: auto;
+    margin-right: 20px; /* Reduced margin */
 }
 
 #modal-post-btn:hover {
-    background-color: #0056b3;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.45);
+    filter: brightness(1.15);
 }
 
 #modal-post-btn:disabled {
-    background-color: #a0c9f1;
+    background: #4a4a4a;
+    color: #888888;
     cursor: not-allowed;
     box-shadow: none;
+    transform: none;
+    filter: none;
 }
 
 .modal-close-icon {
-    font-size: 28px; /* Larger close icon */
+    font-size: 28px; /* Slightly smaller close icon */
     cursor: pointer;
-    color: #6c757d;
-    transition: color 0.2s ease;
-    padding: 5px; /* Increase clickable area */
+    color: #9c9c9c;
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    padding: 6px; /* Reduced padding */
     border-radius: 50%;
+    position: relative;
+    z-index: 1;
 }
 
 .modal-close-icon:hover {
-    color: #343a40;
-    background-color: #f0f2f5;
+    color: #e0e0e0;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
 }
 
-
-/* Modal Image Upload Area */
+/* Modal Image Upload Area Wrapper */
 .modal-main-div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px;
-    border-bottom: 1px solid #f0f2f5;
-    background-color: #fcfcfc;
+    padding: 20px; /* Reduced padding */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: #121212;
     flex-shrink: 0;
+    /* KEY CHANGE: Significantly reduced height for image area */
+    height: 220px; /* Make image section much shorter */
+    box-sizing: border-box;
 }
 
 .modal-image-upload-area {
     width: 100%;
-    max-width: 480px; /* Adjust as needed for modal size */
-    height: 350px; /* Fixed height for consistency */
+    max-width: 400px; /* Reduced max-width for image container */
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 2px dashed #ced4da;
-    border-radius: 12px;
-    background-color: #fdfdfd;
+    border: 3px dashed #3a3a3a;
+    border-radius: 15px;
+    background-color: #1a1a1a;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     overflow: hidden;
     position: relative;
 }
 
 .modal-image-upload-area:hover {
-    border-color: #007bff;
-    background-color: #eaf6ff;
+    border-color: #6f42c4;
+    background-color: #222222;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .modal-image-upload-area img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 10px;
+    border-radius: 12px;
     display: block;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
 }
 
 .modal-image-upload-area img[src]:not([src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"]) {
@@ -137,12 +154,13 @@
 
 .modal-image-upload-area p {
     position: absolute;
-    color: #6c757d;
-    font-size: 1.2rem; /* Slightly larger text */
-    font-weight: 400;
+    color: #b0b0b0;
+    font-size: 1rem; /* Smaller font */
+    font-weight: 500;
     text-align: center;
     pointer-events: none;
-    padding: 0 20px;
+    padding: 0 15px; /* Reduced padding */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* Hide default file input */
@@ -159,106 +177,129 @@
 
 /* Modal Details Section (User Info, Caption, Sports) */
 .modal-details {
-    padding: 25px;
-    flex-grow: 1; /* Allows this section to fill remaining height */
-    overflow-y: auto; /* Enables scrolling within this section */
-    background-color: #ffffff; /* Ensure consistent background */
+    padding: 20px 25px; /* Reduced padding */
+    flex-grow: 1;
+    overflow-y: hidden; /* KEY CHANGE: NO SCROLLING HERE */
+    background-color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space evenly vertically */
 }
 
-/* Card Header (Profile Pic and Name) - Common style with Home posts */
+/* Card Header (Profile Pic and Name) - Styled for dark theme */
 .modal-details .card-header {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
+    gap: 15px; /* Reduced gap */
+    margin-bottom: 20px; /* Reduced margin */
+    flex-shrink: 0;
 }
 
 .modal-details .card-pic img {
-    width: 44px;
-    height: 44px;
+    width: 45px; /* Slightly smaller profile pic */
+    height: 45px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #e9ecef;
+    border: 3px solid #6f42c4;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .modal-details h5 {
     margin: 0;
-    font-size: 1.1rem;
-    color: #343a40;
-    font-weight: 500;
+    font-size: 1.1rem; /* Slightly smaller font */
+    color: #f0f0f0;
+    font-weight: 600;
+    letter-spacing: 0.3px;
 }
 
-/* Caption Textarea - Common style with Home posts */
+/* Caption Textarea - Dark themed */
 .modal-details textarea {
     width: 100%;
-    min-height: 120px;
-    max-height: 250px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 15px;
-    font-size: 1rem;
-    color: #495057;
-    resize: vertical;
+    /* KEY CHANGE: Reduced min/max height for textarea */
+    min-height: 70px; /* Very compact */
+    max-height: 90px; /* Keep it from growing too much */
+    border: 1px solid #3a3a3a;
+    border-radius: 10px;
+    padding: 12px; /* Reduced padding */
+    font-size: 0.95rem; /* Smaller font */
+    color: #e0e0e0;
+    background-color: #222222;
+    resize: vertical; /* Still allow user resize, but within limits */
     box-sizing: border-box;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    flex-grow: 0; /* Important: Don't let it grow infinitely */
+    margin-bottom: 20px; /* Reduced margin */
+}
+
+.modal-details textarea::placeholder {
+    color: #888888;
 }
 
 .modal-details textarea:focus {
     outline: none;
     border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+    background-color: #2a2a2a;
 }
 
-/* Form Group for Select - Common style with Home posts */
+/* Form Group for Select - Dark themed */
 .modal-details .form-group {
-    margin-top: 25px;
+    margin-top: 15px; /* Reduced margin-top */
     margin-bottom: 0;
+    flex-shrink: 0;
 }
 
 .modal-details .form-group label {
     display: block;
-    margin-bottom: 10px;
-    font-weight: 500;
-    color: #495057;
-    font-size: 0.95rem;
+    margin-bottom: 8px; /* Reduced margin */
+    font-weight: 600;
+    color: #d0d0d0;
+    font-size: 0.9rem; /* Smaller font */
 }
 
 .modal-details .sports-select {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #fdfdfd;
-    color: #495057;
+    padding: 10px; /* Reduced padding */
+    border: 1px solid #3a3a3a;
+    border-radius: 10px;
+    font-size: 0.95rem; /* Smaller font */
+    background-color: #222222;
+    color: #e0e0e0;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236c757d' width='18px' height='18px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239c9c9c' width='20px' height='20px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E"); /* Smaller arrow */
     background-repeat: no-repeat;
-    background-position: right 10px center;
+    background-position: right 10px center; /* Adjusted position */
     box-sizing: border-box;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .modal-details .sports-select:focus {
-    border-color: #007bff;
+    border-color: #6f42c4;
     outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+    box-shadow: 0 0 0 0.25rem rgba(111, 66, 196, 0.25);
+    background-color: #2a2a2a;
 }
 
 /* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+@keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* Responsive Adjustments for Modal */
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.75); } /* Start even smaller */
+    to { opacity: 1; transform: scale(0.85); } /* Match new default scale */
+}
+
+/* Responsive Adjustments for Modal - Make them even more compact */
 @media (max-width: 768px) {
     .createPostModal-content {
         width: 95%;
-        max-height: 95vh;
-        border-radius: 12px;
+        max-height: 95vh; /* Keep 95vh for responsiveness */
+        border-radius: 15px;
+        transform: scale(0.9); /* Slightly larger for tablets */
     }
 
     .modal-header {
@@ -272,22 +313,19 @@
         padding: 8px 15px;
     }
     .modal-close-icon {
-        font-size: 24px;
+        font-size: 26px;
     }
 
     .modal-main-div {
-        padding: 25px;
-    }
-    .modal-image-upload-area {
-        height: 280px;
-        max-width: 100%;
+        padding: 15px;
+        height: 200px; /* Reduced image height for tablets */
     }
     .modal-image-upload-area p {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
 
     .modal-details {
-        padding: 20px;
+        padding: 15px 20px;
     }
     .modal-details .card-pic img {
         width: 40px;
@@ -297,13 +335,28 @@
         font-size: 1rem;
     }
     .modal-details textarea {
-        min-height: 100px;
+        min-height: 60px; /* Even smaller textarea */
+        max-height: 80px;
+        padding: 10px;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    .modal-details .form-group {
+        margin-top: 10px;
+    }
+    .modal-details .form-group label {
+        font-size: 0.85rem;
+    }
+    .modal-details .sports-select {
+        padding: 8px;
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 480px) {
     .createPostModal-content {
-        border-radius: 10px;
+        border-radius: 12px;
+        transform: scale(0.95); /* Nearly full size on mobile to remain usable */
     }
     .modal-header {
         padding: 12px 15px;
@@ -314,32 +367,44 @@
     #modal-post-btn {
         font-size: 0.8rem;
         padding: 7px 12px;
+        margin-right: 10px;
     }
     .modal-close-icon {
-        font-size: 22px;
+        font-size: 24px;
     }
 
     .modal-main-div {
-        padding: 20px;
-    }
-    .modal-image-upload-area {
-        height: 220px;
+        padding: 10px;
+        height: 180px; /* Smallest image height for phones */
     }
     .modal-image-upload-area p {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 
     .modal-details {
-        padding: 15px;
+        padding: 10px 15px;
     }
     .modal-details .card-pic img {
         width: 36px;
         height: 36px;
+        border-width: 2px;
     }
     .modal-details h5 {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
     }
     .modal-details textarea {
-        min-height: 80px;
+        min-height: 50px;
+        max-height: 70px;
+        padding: 8px;
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+    }
+    .modal-details .form-group label {
+        font-size: 0.8rem;
+        margin-bottom: 5px;
+    }
+    .modal-details .sports-select {
+        padding: 6px;
+        font-size: 0.85rem;
     }
 }

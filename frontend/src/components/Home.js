@@ -264,7 +264,7 @@ export default function Home() {
                 <h2 className="home-title">Latest Posts</h2>
                 <button className="add-news-btn" onClick={() => setIsCreateModalOpen(true)}>
                     <span className="material-symbols-outlined">add_circle</span>
-                    Add News
+                    Create Post
                 </button>
             </div>
 
