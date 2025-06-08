@@ -114,8 +114,8 @@ export default function Profile() {
                 </div>
                 {/* profile-data - Fixed typo from pofile-data to profile-data */}
                 <div className="profile-data">
-                    <h1>{user.name}</h1>
-                    <p>@{user.userName}</p>
+                    <h1 style={{ color: "#2a2b2c" }}>{user.name}</h1>
+                    <p style={{ color: "#302f2f" }}>@{user.userName}</p>
                     <div className="profile-info"> {/* Removed inline style */}
                         <p><strong>{pic ? pic.length : "0"}</strong> posts</p>
                         <p><strong>{user.followers ? user.followers.length : "0"}</strong> followers</p>

@@ -32,7 +32,6 @@ function App() {
             <Route path="/signin" element={<SignIn />}></Route>
             <Route exact path="/profile" element={<Profie />}></Route>
             <Route path="/searchUser" element={<Search />}></Route>
-            <Route path="/createPost" element={<Createpost />}></Route>
             <Route path="/profile/:userid" element={<UserProfie />}></Route>
             <Route path="/followingpost" element={<MyFolliwngPost />}></Route>
             <Route path="/trending" element={<News />}></Route>

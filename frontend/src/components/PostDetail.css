@@ -1,20 +1,27 @@
 .showComment {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   background-color: rgba(16, 13, 13, 0.4);
+  z-index: 1000;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 .container {
   display: flex;
   width: 80%;
+  max-width: 1200px; /* Add max-width to prevent excessive width */
   background-color: white;
   position: absolute;
   top: 10%;
-  left: 10%;
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
   height: 500px;
+  max-height: 80vh; /* Limit height on smaller screens */
+  border-radius: 8px; /* Add rounded corners */
+  overflow: hidden; /* Ensure content stays within bounds */
 }
 
 .postPic {
@@ -76,4 +83,32 @@
   cursor: pointer;
   padding: 8px 10px;
   font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    flex-direction: column; /* Stack image and comments on mobile */
+    height: auto;
+    max-height: 85vh;
+  }
+  
+  .postPic {
+    height: 50%;
+    max-height: 300px;
+  }
+  
+  .details {
+    height: 50%;
+    max-height: 50vh;
+    overflow-y: auto; /* Allow scrolling in details section */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 95%;
+    top: 5%;
+  }
 }

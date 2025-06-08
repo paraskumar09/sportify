@@ -6,6 +6,8 @@
     background-color: #212121; /* Darker background, consistent with home-page-container */
     border-radius: 12px; /* Rounded corners */
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* Deep shadow for dark theme */
+    width: calc(100% - 40px); /* Ensure container doesn't exceed viewport width */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Search Bar and Filter Container */
@@ -499,7 +501,8 @@
 
 @media (max-width: 576px) {
     .search-container {
-        padding: 20px;
+        padding: 20px 15px; /* Reduce padding on small screens */
+        width: calc(100% - 20px); /* Adjust width calculation for smaller margin */
     }
     .search-bar {
         width: 100%; /* Full width search bar on mobile */

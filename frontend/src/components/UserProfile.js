@@ -90,7 +90,7 @@ export default function UserProfie() {
           >
             <h1>{user.name}</h1>
             <button
-              className="followBtn"
+              className={`followBtn ${isFollow ? "unfollow" : ""}`}
               onClick={() => {
                 if (isFollow) {
                   unfollowUser(user._id);
@@ -138,3 +138,4 @@ export default function UserProfie() {
     </div>
   );
 }
+

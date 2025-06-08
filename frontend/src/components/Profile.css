@@ -54,14 +54,14 @@ body {
 
 .pofile-data h1 {
     margin: 0 0 8px 0;
-    color: #2c3e50;
+    color: #2a2b2c;
     font-size: 2.5rem; /* Larger, more impactful name */
     font-weight: 700;
 }
 
 .pofile-data p {
     margin: 0 0 5px 0;
-    color: #555;
+    color: #302f2f !important;
     font-size: 1.1rem;
 }
 
@@ -103,6 +103,45 @@ body {
     background-color: #0056b3;
     transform: translateY(-2px); /* Subtle lift */
     box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* Follow Button Styling */
+.followBtn {
+  background-color: #007bff; /* Primary blue color */
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 25px; /* Pill-shaped button */
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Soft blue shadow */
+  margin-left: 20px; /* Space from username */
+  outline: none; /* Remove outline on focus */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px; /* Ensure consistent width between Follow/Unfollow states */
+}
+
+.followBtn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Subtle lift effect */
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4); /* Enhanced shadow on hover */
+}
+
+.followBtn:active {
+  transform: translateY(0); /* Press effect */
+}
+
+/* Style for Unfollow state */
+.followBtn.unfollow {
+  background-color: #6c757d; /* Gray for unfollow */
+}
+
+.followBtn.unfollow:hover {
+  background-color: #5a6268; /* Darker gray on hover */
 }
 
 /* Gallery Section */
@@ -382,6 +421,12 @@ body {
         padding: 10px 20px;
         font-size: 1rem;
     }
+
+    .followBtn {
+        padding: 6px 16px;
+        font-size: 0.9rem;
+        min-width: 90px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -463,5 +508,12 @@ body {
     .post-news-btn, .cancel-btn {
         padding: 8px 15px;
         font-size: 0.9rem;
+    }
+
+    .followBtn {
+        padding: 5px 12px;
+        font-size: 0.85rem;
+        min-width: 80px;
+        margin-left: 10px;
     }
 }

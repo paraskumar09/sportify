@@ -31,10 +31,6 @@ export default function Navbar({ login }) {
           <Link to="/profile" className="nav-item">
             <i className="fa-solid fa-user"></i>
           </Link>
-          {/* Create Post Icon */}
-          <Link to="/createPost" className="nav-item">
-            <i className="fa-solid fa-plus"></i>
-          </Link>
           {/* My Following Link */}
           <Link to="/followingpost" className="nav-item text-link">
             My Following
