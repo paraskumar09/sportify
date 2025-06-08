@@ -41,19 +41,30 @@
   margin-left: 10px;
 }
 
-.close-comment {
-  position: fixed;
-  top: 1%;
-  right: 5%;
-  color: white;
-  border: none;
-  cursor: pointer;
+
+.post-detail-actions {
+  margin-left: auto; /* Pushes the icons to the right */
+  display: flex;
+  gap: 15px;
+  align-items: center;
 }
 
-.deletePost {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+.delete-icon, .close-icon {
+  cursor: pointer;
+  font-size: 24px;
+  transition: transform 0.2s ease;
+}
+
+.delete-icon {
+  color: #dc3545;
+}
+
+.close-icon {
+  color: #555;
+}
+
+.delete-icon:hover, .close-icon:hover {
+  transform: scale(1.1);
 }
 
 .comment

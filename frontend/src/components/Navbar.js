@@ -1,58 +1,77 @@
 import React, { useContext } from "react";
-import logo from "../img/logo.png";
-import "./Navbar.css";
-import { Link ,useNavigate} from "react-router-dom";
+import logo from "../img/logo.png"; // Assuming logo.png is dark-theme friendly or will be replaced
+import { Link, useNavigate } from "react-router-dom"; // Corrected useNavigate import
 import { LoginContext } from "../context/LoginContext";
+import './Navbar.css'; // Import the updated CSS
 
 export default function Navbar({ login }) {
   const { setModalOpen } = useContext(LoginContext);
-  const {navigate}= useNavigate();
+  const navigate = useNavigate(); // Correct usage of useNavigate hook
+
+  // Helper function to render navigation links based on login status
   const loginStatus = () => {
-    const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt"); // Check for JWT token in local storage
     if (login || token) {
-      return [
+      // User is logged in
+      return (
         <>
-         <Link to="/">
-            <li><i class="fa-solid fa-house"></i></li>
+          {/* Home Icon */}
+          <Link to="/" className="nav-item">
+            <i className="fa-solid fa-house"></i>
           </Link>
-          <Link to="/searchUser">
-          <li><i class="fa-solid fa-magnifying-glass"></i></li>
+          {/* Search Icon */}
+          <Link to="/searchUser" className="nav-item">
+            <i className="fa-solid fa-magnifying-glass"></i>
           </Link>
-          <Link to="/trending">
-            <i class="fa-solid fa-newspaper"></i>
+          {/* News Icon */}
+          <Link to="/trending" className="nav-item">
+            <i className="fa-solid fa-newspaper"></i>
           </Link>
-          <Link to="/profile">
-            <li><i class="fa-solid fa-user"></i></li>
+          {/* Profile Icon */}
+          <Link to="/profile" className="nav-item">
+            <i className="fa-solid fa-user"></i>
           </Link>
-          <Link to="/createPost"><i class="fa-solid fa-plus"></i></Link>
-          <Link style={{ marginLeft: "20px" }} to="/followingpost">
+          {/* Create Post Icon */}
+          <Link to="/createPost" className="nav-item">
+            <i className="fa-solid fa-plus"></i>
+          </Link>
+          {/* My Following Link */}
+          <Link to="/followingpost" className="nav-item text-link">
             My Following
           </Link>
-          <Link to={""}>
-            <button className="primaryBtn" onClick={() => setModalOpen(true)}>
-              Log Out
-            </button>
-          </Link>
-        </>,
-      ];
+          {/* Log Out Button - opens modal */}
+          <button className="primaryBtn logout-btn" onClick={() => setModalOpen(true)}>
+            Log Out
+          </button>
+        </>
+      );
     } else {
-      return [
+      // User is not logged in
+      return (
         <>
-          <Link to="/signup">
-            <li>SignUp</li>
+          {/* Sign Up Link */}
+          <Link to="/signup" className="nav-item text-link">
+            SignUp
           </Link>
-          <Link to="/signin">
-            <li>SignIn</li>
+          {/* Sign In Link */}
+          <Link to="/signin" className="nav-item text-link">
+            SignIn
           </Link>
-        </>,
-      ];
+        </>
+      );
     }
   };
 
   return (
     <div className="navbar">
-      <Link to="/"><img src={logo} alt="" /></Link>
-      <ul className="nav-menu">{loginStatus()}</ul>
+      {/* Logo Link to Home */}
+      <Link to="/">
+        <img src={logo} alt="Logo" className="navbar-logo" />
+      </Link>
+      {/* Navigation Menu */}
+      <ul className="nav-menu">
+        {loginStatus()}
+      </ul>
     </div>
   );
 }

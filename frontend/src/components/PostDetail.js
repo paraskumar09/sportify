@@ -47,15 +47,28 @@ export default function PostDetail({ item, toggleDetails }) {
               />
             </div>
             <h5>{item.postedBy.name}</h5>
-            <div
-              className="deletePost"
-              onClick={() => {
-                removePost(item._id);
-              }}
-            >
-              <span className="material-symbols-outlined">delete</span>
+            
+            <div className="post-detail-actions">
+              <span 
+                className="material-symbols-outlined delete-icon" 
+                onClick={() => {
+                  removePost(item._id);
+                }}
+              >
+                delete
+              </span>
+
+              <span 
+                className="material-symbols-outlined close-icon" 
+                onClick={() => {
+                  toggleDetails();
+                }}
+              >
+                close
+              </span>
             </div>
           </div>
+
 
           {/* commentSection */}
           <div
@@ -86,32 +99,22 @@ export default function PostDetail({ item, toggleDetails }) {
             <input
               type="text"
               placeholder="Add a comment"
-              //   value={comment}
-              //   onChange={(e) => {
-              //     setComment(e.target.value);
-              //   }}
+            //   value={comment}
+            //   onChange={(e) => {
+            //     setComment(e.target.value);
+            //   }}
             />
             <button
               className="comment"
-              //   onClick={() => {
-              //     makeComment(comment, item._id);
-              //     toggleComment();
-              //   }}
+            //   onClick={() => {
+            //     makeComment(comment, item._id);
+            //     toggleComment();
+            //   }}
             >
               Post
             </button>
           </div>
         </div>
-      </div>
-      <div
-        className="close-comment"
-        onClick={() => {
-          toggleDetails();
-        }}
-      >
-        <span className="material-symbols-outlined material-symbols-outlined-comment">
-          close
-        </span>
       </div>
     </div>
   );

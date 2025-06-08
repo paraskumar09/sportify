@@ -1,232 +1,532 @@
+/* Search Container */
 .search-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto; /* Add vertical margin for breathing room */
+    padding: 30px; /* Increased padding for overall space */
+    background-color: #212121; /* Darker background, consistent with home-page-container */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* Deep shadow for dark theme */
 }
 
+/* Search Bar and Filter Container */
 .search-bar-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px; /* More space below search section */
 }
 
+/* Search Bar Input Area */
 .search-bar {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px 15px;
-  background-color: white;
-  width: 50%;
-  max-width: 500px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #3a3a3a; /* Darker border */
+    border-radius: 10px; /* Slightly more rounded */
+    padding: 12px 20px; /* Increased padding */
+    background-color: #2c2c2c; /* Dark card background color */
+    width: 60%; /* Slightly wider search bar */
+    max-width: 600px; /* Increased max-width */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Softer, deeper shadow */
+    margin-bottom: 15px;
+    transition: all 0.3s ease; /* Smooth transition for focus */
 }
 
+.search-bar:focus-within {
+    border-color: #007bff; /* Highlight border on focus */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Blue glow on focus */
+}
+
+/* Search Icon */
 .search-icon {
-  width: 20px;
-  height: 20px;
-  color: #888;
-  margin-right: 10px;
+    width: 24px; /* Larger icon */
+    height: 24px;
+    color: #a0a0a0; /* Muted color */
+    margin-right: 15px; /* More space for the icon */
 }
 
+/* Search Input Field */
 .search-input {
-  border: none;
-  outline: none;
-  font-size: 16px;
-  flex-grow: 1;
-  padding: 0;
+    border: none;
+    outline: none;
+    font-size: 1.1rem; /* Larger font size */
+    flex-grow: 1;
+    padding: 0;
+    background-color: transparent; /* Transparent background */
+    color: #f0f0f0; /* Light text color */
 }
 
 .search-input::placeholder {
-  color: #aaa;
+    color: #777; /* Darker placeholder text */
 }
 
+/* Current Filter Tag */
 .current-filter {
-  display: flex;
-  align-items: center;
-  margin-top: 5px;
-  font-size: 14px;
-  color: #666;
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* More space above */
+    font-size: 1rem;
+    color: #a0a0a0;
 }
 
 .filter-tag {
-  display: inline-block;
-  padding: 3px 10px;
-  background-color: #e6f7ff;
-  color: #0066cc;
-  border-radius: 12px;
-  font-weight: 500;
-  margin-left: 5px;
+    display: inline-block;
+    padding: 5px 12px; /* Adjusted padding */
+    background-color: #007bff33; /* Light blue background for tag */
+    color: #007bff; /* Primary blue for text */
+    border-radius: 15px; /* Pill shape */
+    font-weight: 500;
+    margin-left: 8px; /* More space from "Showing posts for:" */
+    border: 1px solid #007bff; /* Border for clarity */
 }
 
 /* Grid Layout for Posts */
 .posts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
-  width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Slightly larger min-width */
+    gap: 30px; /* Increased gap between cards */
+    width: 100%;
 }
 
 /* Card styling for grid layout */
 .posts-grid .card {
-  width: 100%;
-  margin: 0;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background-color: white;
+    width: 100%;
+    margin: 0;
+    border-radius: 12px; /* Consistent rounded corners */
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* Consistent shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #2c2c2c; /* Dark card background */
+    border: 1px solid #3a3a3a; /* Subtle border */
 }
 
 .posts-grid .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
 }
 
 .posts-grid .card-header {
-  display: flex;
-  align-items: center;
-  padding: 12px;
-  position: relative;
+    display: flex;
+    align-items: center;
+    padding: 15px; /* Increased padding */
+    position: relative;
+    border-bottom: 1px solid #3a3a3a; /* Darker border */
 }
 
 .posts-grid .card-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 10px;
+    width: 45px; /* Slightly larger profile pic */
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 12px; /* More space */
+    border: 2px solid #555; /* Darker border */
 }
 
 .posts-grid .card-pic img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
+.posts-grid .card-header h5 { /* Targeting the username in header */
+    color: #f0f0f0; /* Light text for username */
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.posts-grid .card-header h5 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.posts-grid .card-header h5 a:hover {
+    text-decoration: underline;
+}
+
+/* Card Image */
 .posts-grid .card-image {
-  height: 220px;
-  overflow: hidden;
+    /* height: 250px;  */
+    overflow: hidden;
+    background-color: #333; /* Placeholder background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .posts-grid .card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px; /* Applied border-radius as requested */
 }
 
+/* Card Content Area */
 .posts-grid .card-content {
-  padding: 12px;
+    padding: 15px; /* Increased padding */
+    color: #e0e0e0; /* Light text color */
+}
+
+.posts-grid .card-content p {
+    margin: 0; /* Reset default paragraph margin */
+}
+
+.posts-grid .card-content .material-symbols-outlined {
+    font-size: 28px; /* Larger icons */
+    cursor: pointer;
+    color: #a0a0a0; /* Muted icon color */
+    transition: color 0.2s ease;
+    margin-right: 10px; /* Space from likes count */
+}
+
+.posts-grid .card-content .material-symbols-outlined:hover {
+    color: #f0f0f0; /* Lighter on hover */
+}
+
+.posts-grid .card-content .material-symbols-outlined-red { /* For liked heart */
+    color: #ff4d4d; /* Bright red */
+}
+.posts-grid .card-content .material-symbols-outlined-red:hover {
+    color: #e60000;
+}
+
+.posts-grid .card-content p:first-of-type { /* Likes count */
+    font-weight: 600;
+    color: #cccccc;
+    font-size: 0.95rem;
+    margin-bottom: 10px; /* Space between likes and body text */
 }
 
 .posts-grid .card-body-text {
-  margin: 10px 0;
-  font-size: 14px;
-  line-height: 1.4;
+    margin: 10px 0;
+    font-size: 1rem; /* Slightly larger font */
+    line-height: 1.5;
+    color: #e0e0e0; /* Light text color */
 }
 
+.posts-grid .card-content p[style] { /* "View all comments" link */
+    font-size: 0.9rem;
+    color: #007bff; /* Link color */
+    margin-top: 10px;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    transition: text-decoration 0.2s ease;
+}
+
+.posts-grid .card-content p[style]:hover {
+    text-decoration: underline;
+}
+
+/* Add Comment Section */
 .posts-grid .add-comment {
-  display: flex;
-  align-items: center;
-  padding: 8px 12px;
-  border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    padding: 12px 15px; /* Adjusted padding */
+    border-top: 1px solid #3a3a3a; /* Darker border */
+    gap: 10px;
+}
+
+.posts-grid .add-comment .material-symbols-outlined {
+    font-size: 24px;
+    color: #a0a0a0;
 }
 
 .posts-grid .add-comment input {
-  flex-grow: 1;
-  border: none;
-  outline: none;
-  padding: 8px;
-  font-size: 14px;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 8px 0;
+    font-size: 0.95rem;
+    background-color: transparent;
+    color: #f0f0f0;
+}
+
+.posts-grid .add-comment input::placeholder {
+    color: #777;
 }
 
 .posts-grid .comment-btn {
-  background-color: transparent;
-  color: #0095f6;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0 8px;
+    background-color: transparent;
+    color: #007bff; /* Primary blue for comment button */
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
 }
 
-/* Loading spinner */
+.posts-grid .comment-btn:hover {
+    background-color: #007bff33; /* Light blue hover background */
+}
+
+/* Loading spinner (used for search and initial load) */
 .loading-spinner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+    color: #a0a0a0;
 }
 
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  border-top-color: #3897f0;
-  animation: spin 1s ease-in-out infinite;
-  margin-bottom: 15px;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.2); /* White border for dark theme */
+    border-radius: 50%;
+    border-top-color: #007bff; /* Blue spinner */
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 15px;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .no-posts-message {
-  text-align: center;
-  padding: 50px 0;
-  color: #666;
+    text-align: center;
+    padding: 50px 0;
+    color: #a0a0a0;
+    font-size: 1.1rem;
 }
 
-/* Sports tag styling */
+/* Sports tag styling in card header */
 .post-sport-tag {
-  display: inline-block;
-  padding: 3px 8px;
-  background-color: #e6f7ff;
-  color: #0066cc;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
-  margin-left: auto;
+    display: inline-block;
+    padding: 4px 10px; /* Adjusted padding */
+    background-color: #28a74533; /* Greenish background for tag */
+    color: #28a745; /* Green text */
+    border-radius: 15px; /* Pill shape */
+    font-size: 0.85rem; /* Smaller font */
+    font-weight: 500;
+    margin-left: auto; /* Push to the right */
+    border: 1px solid #28a745; /* Border for clarity */
 }
+
+/* Comment Modal (from Home.js structure, applying similar styling) */
+.showComment {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; /* Above other content */
+}
+
+.showComment .container {
+    display: flex;
+    max-width: 900px;
+    max-height: 80vh; /* Limit height */
+    width: 90%;
+    background-color: #212121; /* Dark background */
+    border-radius: 12px;
+    overflow: hidden; /* Ensure content stays within bounds */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Deeper shadow */
+    position: relative; /* <--- ADDED: This makes it the positioning context for absolute children */
+}
+
+.showComment .postPic {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a1a;
+}
+
+.showComment .postPic img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensure image fits */
+    border-radius: 8px; /* Consistent image border-radius */
+}
+
+.showComment .details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    color: #e0e0e0; /* Light text */
+}
+
+.showComment .card-header { /* Header within modal */
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #3a3a3a !important; /* Darker border */
+}
+
+.showComment .card-header img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+    border: 2px solid #555;
+}
+
+.showComment .card-header h5 {
+    color: #f0f0f0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.showComment .comment-section {
+    flex-grow: 1; /* Allows comments to take available space */
+    overflow-y: auto; /* Scroll for comments */
+    padding-right: 10px; /* Space for scrollbar */
+    margin-bottom: 15px;
+    border-bottom: 1px solid #3a3a3a !important; /* Darker border */
+}
+
+.showComment .comm {
+    margin-bottom: 10px;
+    line-height: 1.4;
+    color: #cccccc;
+}
+
+.showComment .comm .commenter {
+    font-weight: 600;
+    color: #f0f0f0;
+    margin-right: 5px;
+}
+
+.showComment .commentText {
+    color: #e0e0e0;
+}
+
+.showComment .card-content { /* Content within modal */
+    padding: 15px 0; /* Adjusted padding */
+    border-bottom: 1px solid #3a3a3a; /* Darker border */
+    margin-bottom: 15px;
+}
+
+.showComment .add-comment { /* Comment input within modal */
+    padding: 0; /* Remove extra padding */
+    padding-top: 15px; /* Add top padding for spacing */
+    border-top: none !important; /* Remove top border as it's already on card-content */
+}
+
+.showComment .close-comment {
+    position: absolute;
+    top: 10px; /* Adjusted to be inside and near top */
+    right: 10px; /* Adjusted to be inside and near right */
+    cursor: pointer;
+    font-size: 36px; /* Larger close icon */
+    color: #f0f0f0; /* Light color */
+    transition: color 0.2s ease, transform 0.2s ease;
+    z-index: 10; /* Ensure it's above other content in the modal */
+}
+
+.showComment .close-comment:hover {
+    color: #dc3545; /* Red on hover */
+    transform: rotate(90deg);
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 992px) {
-  .posts-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
+    .search-container {
+        padding: 25px;
+    }
+    .posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    .posts-grid .card-image {
+        height: 220px;
+    }
+    .showComment .container {
+        max-width: 80%;
+    }
 }
 
 @media (max-width: 768px) {
-  .search-bar {
-    width: 70%;
-  }
-  
-  .posts-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 20px;
-  }
-  
-  .posts-grid .card-image {
-    height: 180px;
-  }
+    .search-bar {
+        width: 80%; /* Wider search bar on tablet */
+        padding: 10px 15px;
+    }
+    .search-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+    .search-input {
+        font-size: 1rem;
+    }
+    .posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust for smaller screens */
+        gap: 20px;
+    }
+    .posts-grid .card-image {
+        height: 200px;
+    }
+    .showComment .container {
+        flex-direction: column; /* Stack image and details */
+        max-width: 90%;
+        max-height: 90vh;
+    }
+    .showComment .postPic {
+        height: 50%; /* Image takes half height */
+        min-height: 200px; /* Minimum height for image */
+    }
+    .showComment .details {
+        height: 50%; /* Details take other half */
+        padding: 15px;
+    }
+    .showComment .card-header {
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+    .showComment .comment-section {
+        padding-right: 5px;
+        margin-bottom: 10px;
+    }
+    .showComment .close-comment {
+        font-size: 30px;
+        top: 15px;
+        right: 15px;
+    }
 }
 
 @media (max-width: 576px) {
-  .search-bar {
-    width: 90%;
-  }
-  
-  .posts-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-  
-  .posts-grid .card-image {
-    height: 200px;
-  }
+    .search-container {
+        padding: 20px;
+    }
+    .search-bar {
+        width: 100%; /* Full width search bar on mobile */
+        padding: 8px 12px;
+    }
+    .posts-grid {
+        grid-template-columns: 1fr; /* Single column layout on smallest screens */
+        gap: 15px;
+    }
+    .posts-grid .card-image {
+        height: 220px; /* Adjusted height for single column mobile view */
+    }
+    .posts-grid .card-content {
+        padding: 12px;
+    }
+    .posts-grid .card-content .material-symbols-outlined {
+        font-size: 24px;
+    }
+    .posts-grid .card-content p:first-of-type,
+    .posts-grid .card-body-text,
+    .posts-grid .card-content p[style] {
+        font-size: 0.9rem;
+    }
+    .showComment .container {
+        width: 95%;
+    }
+    .showComment .postPic {
+        min-height: 180px;
+    }
 }

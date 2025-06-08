@@ -1,51 +1,149 @@
-img{
-    width: 25%;
+/* Navbar Container */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Space out logo and menu */
+    align-items: center; /* Vertically align items */
+    padding: 10px 20px; /* Padding inside the navbar */
+    background-color: #2c2c2c; /* Dark background color, matching card color */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Deeper shadow for dark theme */
+    position: sticky; /* Make it sticky at the top */
+    top: 0;
+    z-index: 1000; /* Ensure it stays on top of other content */
+    border-bottom-left-radius: 12px; /* Rounded bottom corners */
+    border-bottom-right-radius: 12px;
+}
+
+/* Navbar Logo */
+.navbar-logo {
+    width: 150px; /* Adjusted size for the logo */
+    height: auto; /* Maintain aspect ratio */
     object-fit: contain;
-    margin-top: 2%;
+    filter: invert(100%); /* Invert logo color for dark background if it's originally dark */
+    transition: transform 0.2s ease;
 }
 
-.navbar{
+.navbar-logo:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Navigation Menu (ul) */
+.nav-menu {
     display: flex;
-    justify-content: space-around;
-    position: sticky;
-    box-shadow: 1px 5px 5px #e0dcdc;
+    align-items: center; /* Align items vertically in the menu */
+    list-style: none; /* Remove bullet points */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    gap: 25px; /* Space between menu items */
 }
 
-i{
-    color:#db183c;
-}
-
-ul{
-    display: flex;
-    align-items: baseline;
-    margin-top: 10px;
-}
-
-li{
-    list-style: none;
-    padding: 1px 20px;
-}
-
-a{
+/* Individual Navigation Item (Link or Icon) */
+.nav-item {
     text-decoration: none;
-    color: black;
-    font-size: 18px;
+    color: #e0e0e0; /* Light text color for nav items */
+    font-size: 1.1rem; /* Slightly larger font size */
+    font-weight: 500;
+    display: flex; /* For aligning icons and text */
+    align-items: center;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.primaryBtn{
+.nav-item:hover {
+    color: #007bff; /* Primary blue on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Icons within navigation items */
+.nav-item i {
+    font-size: 24px; /* Larger icons */
+    color: #a0a0a0; /* Muted icon color for dark theme */
+    transition: color 0.2s ease;
+}
+
+.nav-item i:hover {
+    color: #007bff; /* Primary blue on icon hover */
+}
+
+/* Specific styling for text links (like "My Following", "SignUp", "SignIn") */
+.nav-item.text-link {
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Primary Button (e.g., Log Out) */
+.primaryBtn {
     cursor: pointer;
-    font-weight: bolder;
-    padding: 13px 25px;
-    font-size: 0.8rem;
+    font-weight: 600; /* Slightly less bold */
+    padding: 10px 20px; /* Adjusted padding */
+    font-size: 0.95rem; /* Adjusted font size */
     border: none;
     color: white;
-    background: #db183c;
-    border-radius: 15px;
-    margin-left: 20px;
+    background: #dc3545; /* Red for destructive actions like Log Out */
+    border-radius: 25px; /* Pill-shaped button */
+    margin-left: 15px; /* Space from previous item */
     transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3); /* Red shadow */
 }
 
-.primaryBtn:hover{
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px -10px rgba(219, 24, 44, 0.6);
+.primaryBtn:hover {
+    transform: translateY(-3px); /* Slightly less dramatic lift */
+    box-shadow: 0 6px 15px rgba(220, 53, 69, 0.4); /* Enhanced shadow on hover */
+    background-color: #c82333; /* Darker red on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack logo and menu on small screens */
+        padding: 10px 15px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+    .navbar-logo {
+        margin-bottom: 10px; /* Space between logo and menu */
+    }
+
+    .nav-menu {
+        width: 100%;
+        justify-content: center; /* Center menu items */
+        gap: 15px; /* Reduce gap on smaller screens */
+    }
+
+    .nav-item {
+        font-size: 1rem;
+        padding: 5px 8px;
+    }
+
+    .nav-item i {
+        font-size: 20px;
+    }
+
+    .primaryBtn {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-logo {
+        width: 60px;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap; /* Allow menu items to wrap */
+        gap: 10px;
+    }
+
+    .nav-item {
+        font-size: 0.9rem;
+    }
+
+    .nav-item i {
+        font-size: 18px;
+    }
+
+    .primaryBtn {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
 }
